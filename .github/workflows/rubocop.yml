@@ -16,11 +16,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.2 # or your desired version
-      - name: Update bundler
-        run: gem update --system && gem install bundler
-      - name: Add gem executable path to PATH
-        run: echo "::add-path::$(ruby -e 'puts Gem.user_dir')/bin"
+      - name: Set gem environment variables
+        env:
+          GEM_HOME: ${{ github.workspace }}/.gems
+          GEM_PATH: ${{ github.workspace }}/.gems
+        run: mkdir -p $GEM_HOME
       - name: Install missing gems
-        run: bundle install --jobs 4 --retry 3
+        run: bundle install --jobs 4 --retry 3 --path=.gems
       - name: RuboCop Lint
         run: bundle exec rubocop
