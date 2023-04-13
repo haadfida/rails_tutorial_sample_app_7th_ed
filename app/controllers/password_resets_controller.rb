@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class PasswordResetsController < ApplicationController
   before_action :get_user,         only: %i[edit update]
   before_action :valid_user,       only: %i[edit update]
-  before_action :check_expiration, only: %i[edit update]    # Case 1
+  before_action :check_expiration, only: %i[edit update] # Case 1
 
   def new; end
 
@@ -48,8 +50,8 @@ class PasswordResetsController < ApplicationController
 
   # Confirms a valid user.
   def valid_user
-    unless @user && @user.activated? &&
-           @user.authenticated?(:reset, params[:id])
+    unless @user&.activated? &&
+           @user&.authenticated?(:reset, params[:id])
       redirect_to root_url
     end
   end
