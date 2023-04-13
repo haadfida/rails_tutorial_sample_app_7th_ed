@@ -12,13 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set Ruby version
-        run: ruby -v
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.2 # or your desired version
-      - name: Install Dependencies
+      - name: Install missing gems
         run: bundle install --jobs 4 --retry 3
       - name: RuboCop Lint
         run: bundle exec rubocop
