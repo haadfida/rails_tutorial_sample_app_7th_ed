@@ -22,6 +22,6 @@ jobs:
           GEM_PATH: ${{ github.workspace }}/.gems
         run: mkdir -p $GEM_HOME
       - name: Install missing gems
-        run: bundle install --jobs 4 --retry 3 --path=.gems
+        run: bundle install rubocop
       - name: RuboCop Lint
         run: bundle exec rubocop
