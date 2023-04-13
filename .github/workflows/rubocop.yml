@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set Ruby version
+        run: ruby -v
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
