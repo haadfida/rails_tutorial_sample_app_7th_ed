@@ -1,0 +1,22 @@
+name: RuboCop
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7 # or your desired version
+      - name: Install Dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: RuboCop Lint
+        run: bundle exec rubocop
